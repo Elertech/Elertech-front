@@ -54,7 +54,7 @@
           <div class="col-4">
 
             <label class="form-label" for="nomeCartaoCadastrar">Nome escrito no cartão</label>
-            <input style="text-transform: uppercase;" name="nome" type="text" class="form-control"
+            <input [(ngModel)]="cartao.nomeCartao" name="nomeCartao" type="text" class="form-control"
               id="nomeCartaoCadastrar">
             <div id="nomeCartaoCadastrarHelp" class="form-text">Campo obrigatório</div>
           </div>
