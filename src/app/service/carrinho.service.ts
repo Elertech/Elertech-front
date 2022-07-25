@@ -17,11 +17,11 @@ export class CarrinhoService {
   }
 
   getAll(): Observable<Carrinho[]>{
-    return this.http.get<Carrinho[]>(environment.url+'/carrinho', this.token)
+    return this.http.get<Carrinho[]>(environment.url+`/carrinho`, this.token)
   }
 
   getById(id: number){
-    return this.http.get<Carrinho>(environment.url+'/carrinho/'+ id, this.token)
+    return this.http.get<Carrinho>(environment.url+`/carrinho/${id}`, this.token)
   }
 
   getByStatus(status: string){
@@ -29,11 +29,16 @@ export class CarrinhoService {
   }
 
   save(carrinho: Carrinho): Observable<Carrinho>{
-    return this.http.post<Carrinho>(environment.url+'/adicionar', carrinho, this.token )
+    return this.http.post<Carrinho>(environment.url+'/carrinho/adicionar', carrinho, this.token )
+  }
+
+  // Adicionar item ao carrinho
+  adicionarProduto(idCarrinho: number, idProduto: number, quantidade: number){
+    return this.http.post<Carrinho>(environment.url+`/carrinho/${idCarrinho}/adicionar/produto/${idProduto}/quantidade/${quantidade}`, this.token )
   }
 
   update(carrinho: Carrinho): Observable<Carrinho>{
-    return this.http.put<Carrinho>(environment.url+'/atualizar', carrinho, this.token)
+    return this.http.put<Carrinho>(environment.url+'/carrinho/atualizar', carrinho, this.token)
   }
 
   fazerPedido(carrinho: Carrinho[]): Observable<Carrinho[]>{
@@ -41,6 +46,6 @@ export class CarrinhoService {
   }
 
   delete(id: number){
-    return this.http.delete<Carrinho>(environment.url+'/'+id, this.token)
+    return this.http.delete<Carrinho>(environment.url+'/carrinho/'+id, this.token)
   }
 }

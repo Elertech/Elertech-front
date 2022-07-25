@@ -25,60 +25,60 @@ export class HistoricoPedidosComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.carregarTodosCarrinhos()
+    // this.carregarTodosCarrinhos()
   }
 
   dias:string[] = [];
 
-  carregarTodosCarrinhos(){
-    this.auth.getById(environment.id).subscribe((data: Usuario)=>{
-      this.usuario = data
-      this.lista = this.usuario.carrinho
-      this.listaPedidos = this.lista.filter(function(c: Carrinho){
-        return c.status == "pedido"
-      })
+  // carregarTodosCarrinhos(){
+  //   this.auth.getById(environment.id).subscribe((data: Usuario)=>{
+  //     this.usuario = data
+  //     this.lista = this.usuario.carrinho
+  //     this.listaPedidos = this.lista.filter(function(c: Carrinho){
+  //       return c.status == "pedido"
+  //     })
 
-      //console.log(this.listaPedidos)
+  //     //console.log(this.listaPedidos)
 
-      this.listaPedidos.forEach((item) => {
-        if(!this.dias.includes(item.data)){
-          this.dias.push(item.data)
-        }
-      })
+  //     this.listaPedidos.forEach((item) => {
+  //       if(!this.dias.includes(item.data)){
+  //         this.dias.push(item.data)
+  //       }
+  //     })
 
-      for(let dia of this.dias){
-        console.log(dia)
-      }
+  //     for(let dia of this.dias){
+  //       console.log(dia)
+  //     }
 
-      this.somaTotal()
+  //     this.somaTotal()
 
-    })
-  }
+  //   })
+  // }
 
-  selectedDia:string = '';
-  setSelectedDia(dia:string){
-    this.selectedDia = dia
-  }
+  // selectedDia:string = '';
+  // setSelectedDia(dia:string){
+  //   this.selectedDia = dia
+  // }
 
-  getPedidosByDia(){
-    this.somaDosProdutos = 0
-    return [...this.listaPedidos].filter(item => {
-      for(let i=0; i < this.item.length; i++){
-        this.somaDosProdutos = this.item[i].valorTotal + this.somaDosProdutos
-        console.log(this.somaDosProdutos)
-      }
-       return item.data == this.selectedDia
-    })
-  }
+  // getPedidosByDia(){
+  //   this.somaDosProdutos = 0
+  //   return [...this.listaPedidos].filter(item => {
+  //     for(let i=0; i < this.item.length; i++){
+  //       this.somaDosProdutos = this.item[i].valorTotal + this.somaDosProdutos
+  //       console.log(this.somaDosProdutos)
+  //     }
+  //      return item.data == this.selectedDia
+  //   })
+  // }
 
-  somaTotal(){
-    this.somaDosProdutos = 0
+  // somaTotal(){
+  //   this.somaDosProdutos = 0
 
-    //fazer um filtro por data do carrinho
-    for(let i=0; i < this.listaPedidos.length; i++){
-      this.somaDosProdutos = this.listaPedidos[i].valorTotal + this.somaDosProdutos
-    }
-  }
+  //   //fazer um filtro por data do carrinho
+  //   for(let i=0; i < this.listaPedidos.length; i++){
+  //     this.somaDosProdutos = this.listaPedidos[i].valorTotal + this.somaDosProdutos
+  //   }
+  // }
 
 
 }
