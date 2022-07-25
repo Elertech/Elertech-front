@@ -36,21 +36,13 @@ export class TabelaEnderecoComponent implements OnInit {
   }
 
   getAllEnderecoUsuario(){
-    // Obter o usuario logado atraves do método getById da Service de autenticação
-    this.auth.getById(environment.id).subscribe((resposta: Usuario)=>{
-      // Armazenar a resposta na variavel usuario
-      this.usuario = resposta
-      // Armazenar o atributo endereco do usuario na variável listaEndereco
-      this.listaEnderecos = this.usuario.endereco
+    this.enderecoService.getAll().subscribe((data: Endereco[])=>{
+      this.listaEnderecos = data
     })
   }
 
   cadastrar(){
-    const user = new Usuario()
-    user.id = this.usuario.id
-    // indicar para o endereco qual usuario deve ser associado
     this.endereco.cep = $('#cepCadastrar').val()
-    this.endereco.usuario = user
     this.enderecoService.save(this.endereco).subscribe((data: Endereco) => {
       this.endereco = data
       console.log(this.endereco)
@@ -79,12 +71,8 @@ export class TabelaEnderecoComponent implements OnInit {
   }
 
   atualizar(){
-    const user = new Usuario()
-    user.id = this.usuario.id
-    this.endereco.usuario = user
     this.endereco.endereco = $('#enderecoEditar').val()
     this.endereco.cep = $('#cepEditar').val()
-
     this.enderecoService.update(this.endereco).subscribe((data: Endereco)=>{
       this.endereco = data
       this.endereco = new Endereco()

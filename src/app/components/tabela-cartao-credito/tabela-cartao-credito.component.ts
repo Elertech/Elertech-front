@@ -37,7 +37,7 @@ export class TabelaCartaoCreditoComponent implements OnInit {
 
   // Metodo para buscar usuario logado no banco de dados, e buscar os cartões desse usuario específico
     getAllCartaoUsuario(){
-    this.cartaoService.getAll(environment.id).subscribe((data: CartaoCredito[]) => {
+    this.cartaoService.getAll().subscribe((data: CartaoCredito[]) => {
       this.listaCartao = data
     })
   }
@@ -54,7 +54,7 @@ export class TabelaCartaoCreditoComponent implements OnInit {
     this.cartao.numeroCartao = $('#numeroCartaoCadastrar').val()
     this.cartao.dataValidade = $('#validadeCadastrar').val()
     this.cartao.cvv = $('#cvvCadastrar').val()
-    this.cartaoService.post(this.cartao, environment.id).subscribe((data: CartaoCredito) => {
+    this.cartaoService.post(this.cartao).subscribe((data: CartaoCredito) => {
       this.cartao = data
       this.alerta.showAlertSuccess('Cartao cadastrado com sucesso')
       this.limparModal()
