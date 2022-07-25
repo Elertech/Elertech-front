@@ -19,12 +19,12 @@ export class CartaoCreditoService {
     return this.http.get<CartaoCredito>(environment.url+`/cartaocredito/${id}`, this.token)
   }
 
-  getAll(idUsuario: number): Observable<CartaoCredito[]>{
-    return this.http.get<CartaoCredito[]>(environment.url+`/cartaocredito/buscar/user/${idUsuario}`, this.token)
+  getAll(): Observable<CartaoCredito[]>{
+    return this.http.get<CartaoCredito[]>(environment.url+`/cartaocredito/buscar/user/${environment.id}`, this.token)
   }
 
-  post(cartao: CartaoCredito, idUsuario: number):Observable<CartaoCredito>{
-    return this.http.post<CartaoCredito>(environment.url+`/cartaocredito/cadastrar/user/${idUsuario}`, cartao, this.token)
+  post(cartao: CartaoCredito):Observable<CartaoCredito>{
+    return this.http.post<CartaoCredito>(environment.url+`/cartaocredito/cadastrar/user/${environment.id}`, cartao, this.token)
   }
 
   delete(id: number){

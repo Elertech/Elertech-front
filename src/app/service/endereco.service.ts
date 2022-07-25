@@ -16,7 +16,7 @@ export class EnderecoService {
   }
 
   getAll(): Observable<Endereco[]>{
-    return this.http.get<Endereco[]>(environment.url+'/endereco', this.token)
+    return this.http.get<Endereco[]>(environment.url+`/endereco/buscar/user/${environment.id}`, this.token)
   }
 
   getById(id: number):Observable<Endereco>{
@@ -24,7 +24,7 @@ export class EnderecoService {
   }
 
   save(endereco: Endereco): Observable<Endereco>{
-    return this.http.post<Endereco>(environment.url+'/endereco/cadastrar', endereco, this.token)
+    return this.http.post<Endereco>(environment.url+`/endereco/cadastrar/user/${environment.id}`, endereco, this.token)
   }
 
   update(endereco: Endereco): Observable<Endereco>{
