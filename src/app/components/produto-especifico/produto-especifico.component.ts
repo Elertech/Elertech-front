@@ -133,7 +133,7 @@ export class ProdutoEspecificoComponent implements OnInit {
     atualizarEstoque(){
       // Atualiza o estoque disponível
       this.produto.estoque = this.produto.estoque - this.carrinho.quantidade
-      this.produtoService.update(this.produto).subscribe((data: Produto)=>{
+      this.produtoService.update(this.produto, this.produto.categoria.id).subscribe((data: Produto)=>{
         this.produto = data
       })
     }

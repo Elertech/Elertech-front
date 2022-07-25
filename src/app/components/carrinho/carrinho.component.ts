@@ -110,7 +110,7 @@ export class CarrinhoComponent implements OnInit {
       this.produto = data
       // Atualiza o estoque disponível
       this.produto.estoque = this.produto.estoque + quantidade
-      this.produtoService.update(this.produto).subscribe((data: Produto)=>{
+      this.produtoService.update(this.produto, this.produto.categoria.id).subscribe((data: Produto)=>{
       this.produto = data
       console.log('Estoque atualizado com sucesso')
       this.produto = new Produto

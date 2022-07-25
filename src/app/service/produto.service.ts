@@ -31,12 +31,12 @@ export class ProdutoService {
     return this.http.get<Produto[]>(environment.url+`/produto/pesquisar/categoria/${idCategoria}`, this.token)
   }
 
-  save(produto: Produto):Observable<Produto>{
-    return this.http.post<Produto>(environment.url+`/produto/cadastrar`, produto, this.token)
+  save(produto: Produto, idCategoria: number):Observable<Produto>{
+    return this.http.post<Produto>(environment.url+`/produto/cadastrar/categoria/${idCategoria}`, produto, this.token)
   }
 
-  update(produto:Produto):Observable<Produto>{
-    return this.http.put<Produto>(environment.url+`/produto/atualizar`, produto, this.token)
+  update(produto:Produto, idCategoria: number):Observable<Produto>{
+    return this.http.put<Produto>(environment.url+`/produto/atualizar/categoria/${idCategoria}`, produto, this.token)
   }
 
   delete(id: number){
