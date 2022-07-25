@@ -13,11 +13,7 @@ export class CardPesquisaCategoriaComponent implements OnInit {
 
   categoria: string
   categoriaId: number
-  listaCategoria: Produto[]
-
-  produto: Produto = new Produto
-  listaProduto: Produto[]
-  lista = new Array
+  listaProduto = new Array
 
   constructor(private router: Router,private categoriaService: CategoriaService, private produtoService: ProdutoService, private route: ActivatedRoute) {
    }
@@ -31,7 +27,7 @@ export class CardPesquisaCategoriaComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.categoriaId = params['id']
       this.categoria = params['nomeCategoria']
-      this.getProduto()
+      this.carregarFiltro()
     })
   }
 
@@ -39,16 +35,11 @@ export class CardPesquisaCategoriaComponent implements OnInit {
     this.router.navigate(['/produto'],{queryParams: produto})
   }
 
-  getProduto(){
-    let id = this.categoriaId
-    this.produtoService.getAll().subscribe((data: Produto[])=>{
-      this.lista = data
-      this.lista.forEach(item => {
+  carregarFiltro(){
+    this.produtoService.getByCategoria(this.categoriaId).subscribe((data: Produto[])=>{
+      this.listaProduto = data
+      this.listaProduto.forEach(item => {
         item.preco = item.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-      })
-
-      this.listaCategoria = this.lista.filter(function(c: Produto){
-        return c.categoria.id == id
       })
     })
   }
