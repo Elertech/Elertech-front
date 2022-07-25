@@ -3,32 +3,32 @@
     <label class="fs-3">Filtrando por <label class="fw-bold">{{categoria}}</label></label>
     <hr>
   </div>
-  <div class="container" *ngFor="let produto of listaCategoria">
+  <div class="container" *ngFor="let item of listaProduto">
 
     <div class="card">
       <div class="row g-0 justify-content-center align-items-center">
 
         <div class="col-md-3 text-center">
-          <a (click)="abrirProdutoEspecifico(produto)">
-            <img src="{{produto.foto}}" height="200" width="200" class="img-fluid mx-auto d-block ">
+          <a (click)="abrirProdutoEspecifico(item)">
+            <img src="{{item.foto}}" height="200" width="200" class="img-fluid mx-auto d-block ">
           </a>
         </div>
 
         <div class="col-md-9">
           <div class="card-body">
             <div class="card-title">
-              <a (click)="abrirProdutoEspecifico(produto)" style="text-decoration: none; color:black;">
-                <p class="pt-3 nomeProduto">{{produto.nome}}</p>
+              <a (click)="abrirProdutoEspecifico(item)" style="text-decoration: none; color:black;">
+                <p class="pt-3 nomeProduto">{{item.nome}}</p>
               </a>
             </div>
 
             <div class="row">
               <div class="col-12">
-                <p class="descricaoProduto"><strong>Descrição: </strong>{{produto.descricao}}</p>
+                <p class="descricaoProduto"><strong>Descrição: </strong>{{item.descricao}}</p>
               </div>
               <div class="col-12">
                 <label>Assinatura por:</label>
-                <p class="precoProduto">{{produto.preco}}</p>
+                <p class="precoProduto">{{item.preco}}</p>
               </div>
             </div>
           </div>

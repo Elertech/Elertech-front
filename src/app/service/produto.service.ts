@@ -23,12 +23,12 @@ export class ProdutoService {
     return this.http.get<Produto>(environment.url+`/produto/${id}`, this.token)
   }
 
-  getbyName(nome: string):Observable<Produto[]>{
+  getByName(nome: string):Observable<Produto[]>{
     return this.http.get<Produto[]>(environment.url+`/produto/pesquisar/${nome}`, this.token)
   }
 
-  getbyCategoria(categoria: string):Observable<Produto[]>{
-    return this.http.get<Produto[]>(environment.url+`/produto/categoria/${categoria}`, this.token)
+  getByCategoria(idCategoria: number):Observable<Produto[]>{
+    return this.http.get<Produto[]>(environment.url+`/produto/pesquisar/categoria/${idCategoria}`, this.token)
   }
 
   save(produto: Produto):Observable<Produto>{
