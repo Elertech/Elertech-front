@@ -16,33 +16,16 @@ export class CarrinhoService {
     headers: new HttpHeaders().set('Autorization', environment.token)
   }
 
-  getAll(): Observable<Carrinho[]>{
-    return this.http.get<Carrinho[]>(environment.url+`/carrinho`, this.token)
-  }
-
   getById(id: number){
     return this.http.get<Carrinho>(environment.url+`/carrinho/${id}`, this.token)
   }
 
-  // getByStatus(status: string){
-  //   return this.http.get<Carrinho>(environment.url+'/carrinho/'+status, this.token)
-  // }
-
-  // save(carrinho: Carrinho): Observable<Carrinho>{
-  //   return this.http.post<Carrinho>(environment.url+'/carrinho/adicionar', carrinho, this.token )
-  // }
-
-  // Adicionar item ao carrinho
   adicionarProduto(idCarrinho: number, idProduto: number, quantidade: number){
     return this.http.post<Carrinho>(environment.url+`/carrinho/${idCarrinho}/adicionar/produto/${idProduto}/quantidade/${quantidade}`, this.token )
   }
 
-  update(carrinho: Carrinho): Observable<Carrinho>{
-    return this.http.put<Carrinho>(environment.url+'/carrinho/atualizar', carrinho, this.token)
-  }
-
-  fazerPedido(carrinho: Carrinho[]): Observable<Carrinho[]>{
-    return this.http.put<Carrinho[]>(environment.url+'/carrinho/pedido', carrinho, this.token)
+  fazerPedido(carrinho: Carrinho): Observable<Carrinho>{
+    return this.http.put<Carrinho>(environment.url+'/carrinho/pedido', carrinho, this.token)
   }
 
   deleteItem(id: number){

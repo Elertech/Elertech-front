@@ -9,6 +9,6 @@ export const environment = {
   razaoSocial: '',
   cnpj: '',
   carrinho:0,
-  url: 'https://elertech.herokuapp.com'
-  // url: 'http://localhost:8080'
+  // url: 'https://elertech.herokuapp.com'
+  url: 'http://localhost:8080'
 };

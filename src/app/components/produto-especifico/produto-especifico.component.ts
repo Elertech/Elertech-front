@@ -92,33 +92,6 @@ export class ProdutoEspecificoComponent implements OnInit {
     }
   }
 
-    // adicionarProduto(){
-    //   if(this.auth.logado()){
-    //       // Configurar um objeto de produto para enviar ao carrinho
-    //       this.carrinho.usuario = this.usuario
-    //       this.carrinho.idProduto = this.produto.id
-    //       this.carrinho.foto = this.produto.foto
-    //       this.carrinho.nomeProduto = this.produto.nome
-    //       this.carrinho.descricao = this.produto.descricao
-    //       this.carrinho.categoria = this.produto.categoria.nomeCategoria
-    //       this.carrinho.quantidade = this.quantidade
-    //       this.carrinho.valorUnitario = this.produto.preco
-    //       this.carrinho.valorTotal = this.quantidade * this.produto.preco
-    //       this.carrinho.status = 'carrinho'
-
-    //      if(this.carrinho.quantidade > this.produto.estoque){
-    //         this.alerta.showAlertDanger('Não temos essa quantidade em estoque')
-    //       } else if(this.carrinho.quantidade <= 0){
-    //         this.alerta.showAlertDanger('Adicione produtos ao carrinho')
-    //       } else {
-    //         this.salvarCarrinho()
-    //         this.atualizarEstoque()
-    //       }
-    //   } else{
-    //     this.alerta.showAlertDanger('É necessário estar logado para fazer uma assinatura')
-    //   }
-    // }
-
     adicionarProdutoAoCarrinho(){
       if(this.auth.logado()){
          if(this.quantidade > this.produto.estoque){
@@ -135,23 +108,5 @@ export class ProdutoEspecificoComponent implements OnInit {
       }
     }
 
-    // salvarCarrinho(){
-    //   this.auth.getById(environment.id).subscribe((data: Usuario)=>{
-    //     this.usuario = data
-    //   })
-
-    //   this.carrinhoService.save(this.carrinho).subscribe((data: Carrinho)=>{
-    //     this.carrinho = data
-    //     this.carrinho = new Carrinho()
-    //   })
-    // }
-
-    // atualizarEstoque(){
-    //   // Atualiza o estoque disponível
-    //   this.produto.estoque = this.produto.estoque - this.carrinho.quantidade
-    //   this.produtoService.update(this.produto, this.produto.categoria.id).subscribe((data: Produto)=>{
-    //     this.produto = data
-    //   })
-    // }
   //fim
 }

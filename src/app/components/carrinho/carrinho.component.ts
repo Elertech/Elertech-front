@@ -74,15 +74,15 @@ export class CarrinhoComponent implements OnInit {
   excluirItem(id: number){
     this.carrinhoService.deleteItem(id).subscribe(()=>{
       this.alerta.showAlertWarning(`Produto excluído com sucesso`)
+      this.CarregarCarrinho()
     })
-    this.CarregarCarrinho()
   }
 
   limpar(id: number){
     this.carrinhoService.deleteItem(id).subscribe(()=>{
       this.alerta.showAlertWarning(`Produto excluído com sucesso`)
+      this.CarregarCarrinho()
     })
-    this.CarregarCarrinho()
   }
 
 }
