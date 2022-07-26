@@ -24,13 +24,13 @@ export class CarrinhoService {
     return this.http.get<Carrinho>(environment.url+`/carrinho/${id}`, this.token)
   }
 
-  getByStatus(status: string){
-    return this.http.get<Carrinho>(environment.url+'/carrinho/'+status, this.token)
-  }
+  // getByStatus(status: string){
+  //   return this.http.get<Carrinho>(environment.url+'/carrinho/'+status, this.token)
+  // }
 
-  save(carrinho: Carrinho): Observable<Carrinho>{
-    return this.http.post<Carrinho>(environment.url+'/carrinho/adicionar', carrinho, this.token )
-  }
+  // save(carrinho: Carrinho): Observable<Carrinho>{
+  //   return this.http.post<Carrinho>(environment.url+'/carrinho/adicionar', carrinho, this.token )
+  // }
 
   // Adicionar item ao carrinho
   adicionarProduto(idCarrinho: number, idProduto: number, quantidade: number){
@@ -45,7 +45,11 @@ export class CarrinhoService {
     return this.http.put<Carrinho[]>(environment.url+'/carrinho/pedido', carrinho, this.token)
   }
 
-  delete(id: number){
-    return this.http.delete<Carrinho>(environment.url+'/carrinho/'+id, this.token)
+  deleteItem(id: number){
+    return this.http.delete<Carrinho>(environment.url+`/carrinho/${environment.id}/deleteitem/${id}`, this.token)
+  }
+
+  limparCarrinho(id: number){
+    return this.http.delete<Carrinho>(environment.url+`/carrinho/limpar/${environment.id}`, this.token)
   }
 }
