@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/model/Usuario';
 import { AuthService } from 'src/app/service/auth.service';
 import { environment } from 'src/environments/environment.prod';
+import { PedidoService } from 'src/app/service/pedido.service';
+import { Pedido } from 'src/app/model/Pedido';
+import { Item } from 'src/app/model/Item';
 
 @Component({
   selector: 'app-historico-pedidos',
@@ -10,25 +13,44 @@ import { environment } from 'src/environments/environment.prod';
   styleUrls: ['./historico-pedidos.component.css']
 })
 export class HistoricoPedidosComponent implements OnInit {
-  usuario: Usuario = new Usuario()
-  listaPedidos: Carrinho[] = [];
-  lista: any = new Carrinho()
+  // usuario: Usuario = new Usuario()
+  // listaPedidos: Carrinho[] = [];
+  // lista: any = new Carrinho()
 
-  somaDosProdutos: number
+  // somaDosProdutos: number
 
-  grupo = new Array
+  // grupo = new Array
 
-  item = new Array
+  // item = new Array
+  listaPedidos: Pedido[] = []
+  pedido: Pedido = new Pedido()
+  listaItenPedido: Item[] = []
+  pagamentoPedido: string
+  enderecoEntregaPedido: string
+
 
   constructor(
-    private auth: AuthService
+    private auth: AuthService, private pedidoService: PedidoService
   ) { }
 
   ngOnInit(){
     // this.carregarTodosCarrinhos()
+    this.getPedidos()
   }
 
   dias:string[] = [];
+
+  getPedidos(){
+    this.pedidoService.getAllByUsuario().subscribe((data: Pedido[])=>{
+      this.listaPedidos = data
+    })
+  }
+
+  abrirPedido(pedido: Pedido){
+    this.listaItenPedido = pedido.item
+    this.enderecoEntregaPedido = pedido.enderecoEntrega
+    this.pagamentoPedido = pedido.formaPagamento
+  }
 
   // carregarTodosCarrinhos(){
   //   this.auth.getById(environment.id).subscribe((data: Usuario)=>{

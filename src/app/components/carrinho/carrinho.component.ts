@@ -4,6 +4,7 @@ import { Carrinho } from 'src/app/model/Carrinho';
 import { CartaoCredito } from 'src/app/model/CartaoCredito';
 import { Endereco } from 'src/app/model/Endereços';
 import { Item } from 'src/app/model/Item';
+import { Pedido } from 'src/app/model/Pedido';
 import { Produto } from 'src/app/model/Produto';
 import { Usuario } from 'src/app/model/Usuario';
 import { AlertaService } from 'src/app/service/alerta.service';
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
 import { CartaoCreditoService } from 'src/app/service/cartao-credito.service';
 import { EnderecoService } from 'src/app/service/endereco.service';
+import { PedidoService } from 'src/app/service/pedido.service';
 import { ProdutoService } from 'src/app/service/produto.service';
 import { environment } from 'src/environments/environment.prod';
 declare var $:any;
@@ -25,6 +27,7 @@ export class CarrinhoComponent implements OnInit {
   carrinho:Carrinho = new Carrinho()
   cartao: CartaoCredito = new CartaoCredito()
   endereco: Endereco = new Endereco()
+  pedido: Pedido = new Pedido()
 
   //Listas para interagir com o html
   listaItem: any = new Item()
@@ -39,7 +42,8 @@ export class CarrinhoComponent implements OnInit {
     private alerta: AlertaService,
     private produtoService: ProdutoService,
     private cartaoService: CartaoCreditoService,
-    private enderecoService: EnderecoService
+    private enderecoService: EnderecoService,
+    private pedidoService: PedidoService
   ) { }
 
   ngOnInit() {
@@ -69,6 +73,14 @@ export class CarrinhoComponent implements OnInit {
       this.carrinho = data
       this.listaItem = this.carrinho.item
     })
+
+    this.enderecoService.getAll().subscribe((data: Endereco[])=>{
+      this.listaEndereco = data
+    })
+
+    this.cartaoService.getAll().subscribe((data: CartaoCredito[])=>{
+      this.listaCartao = data
+    })
   }
 
   excluirItem(id: number){
@@ -83,6 +95,28 @@ export class CarrinhoComponent implements OnInit {
       this.alerta.showAlertWarning(`Produto excluído com sucesso`)
       this.CarregarCarrinho()
     })
+  }
+
+  fecharPedido(){
+    this.pedidoService.fecharPedido(this.endereco.id, this.cartao.id).subscribe((data: Pedido)=>{
+      this.pedido = data
+      this.alerta.showAlertSuccess('Pedido finalizado com sucesso')
+      this.pedido = new Pedido()
+    },
+    (error: any) => {
+      switch(error.status){
+        case 400:
+          this.alerta.showAlertDanger('Erro na requisção, erro: '+error.status)
+        break;
+        case 401:
+          this.alerta.showAlertDanger('Acesso não autorizado, erro: '+error.status)
+        break;
+        case 500:
+          this.alerta.showAlertDanger('Erro na aplicação, erro: '+error.status)
+        break;
+      }
+    })
+
   }
 
 }
