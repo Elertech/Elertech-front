@@ -15,6 +15,10 @@ export class PedidoService {
     headers: new HttpHeaders().set('Autorization', environment.token)
   }
 
+  getPedidoById(id: number): Observable<Pedido>{
+    return this.http.get<Pedido>(environment.url+`/pedido/${id}`, this.token)
+  }
+
   getAllByUsuario(): Observable<Pedido[]>{
     return this.http.get<Pedido[]>(environment.url+`/pedido/usuario/${environment.id}`, this.token)
   }

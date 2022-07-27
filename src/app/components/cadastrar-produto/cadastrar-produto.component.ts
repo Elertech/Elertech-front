@@ -140,7 +140,7 @@ export class CadastrarProdutoComponent implements OnInit {
       form.append("image", file.files[0])
       var settings= new Array
       settings = [{
-          url: "https://api.imgbb.com/1/upload?key=f7dc66d97778642fac1278cb89831b02",
+          url: "https://api.imgbb.com/1/upload?key=2016c75902636a962a8ac59386264d3d",
           method: "POST",
           timeout: 0,
           processData: false,

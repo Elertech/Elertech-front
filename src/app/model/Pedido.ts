@@ -1,8 +1,7 @@
-import { Item } from "./Item"
+import { ItemPedido } from "./ItemPedido"
 import { Usuario } from "./Usuario"
 
-export class Pedido
-{
+export class Pedido{
   public id: number
   public quantidadeItens: number
   public valorTotalPedido: number
@@ -10,5 +9,5 @@ export class Pedido
   public formaPagamento: string
   public dataPedido: Date
   public usuario: Usuario
-  public item: Item[]
+  public item: ItemPedido[]
 }

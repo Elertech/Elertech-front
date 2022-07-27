@@ -11,14 +11,14 @@
 
       <div class="col-12 row-cols ">
         <div class="row col mb-3 fw-bold ">
-          <div class="col text-center d-flex justify-content-center align-items-center">DATA DO PEDIDO</div>
+          <div class="col text-center d-flex justify-content-center align-items-center">Lista de pedidos</div>
 
         </div>
         <hr>
-        <div *ngFor="let item of listaPedidos" class="pai filha hover-effect" data-bs-toggle="modal"
-          data-bs-target="#abrirCarrinhoModal" (click)="abrirPedido(item)">
+        <div *ngFor="let pedido of listaPedidos" class="pai filha hover-effect" data-bs-toggle="modal"
+          data-bs-target="#abrirCarrinhoModal" (click)="abrirPedido(pedido.id)">
           <div class="col fw-bold  d-flex justify-content-center align-items-center">
-            <p class="display-5">{{item.dataPedido}}</p>
+            <p class="pedidoNome">{{pedido.dataPedido}} | Valor total do pedido: {{pedido.valorTotalPedido}}</p>
           </div>
           <hr>
         </div>
@@ -39,7 +39,8 @@
         </div>
         <div class="modal-body fs-15">
           <div>
-            <label>Endereço de entrega: <b>{{enderecoEntregaPedido}}</b> | Forma de pagamento: <b>{{pagamentoPedido}}</b></label>
+            <label>Endereço de entrega: <b>{{enderecoEntregaPedido}}</b> | Forma de pagamento:
+              <b>{{pagamentoPedido}}</b></label>
           </div>
           <hr>
           <div class="row col fw-bold">
@@ -50,15 +51,15 @@
             <div class="col text-center d-flex justify-content-center align-items-center">SUBTOTAL</div>
           </div>
           <hr>
-          <div class="row col text-center" *ngFor="let i of listaItenPedido">
+          <div class="row col text-center" *ngFor="let itemPedido of listaItenPedido">
             <div class="col">
-              <img src="{{i.produto.foto}}" alt="" class=""
+              <img src="{{itemPedido.produto.foto}}" alt="" class=""
                 style="max-width:90%; max-height:100%; width: auto; height: auto;">
             </div>
-            <div class="col">{{i.produto.nome}}</div>
-            <div class="col">{{i.quantidade}}</div>
-            <div class="col fw-bold">R$ {{i.produto.preco}}</div>
-            <div class="col fw-bold">R$ {{i.valorTotal}}</div>
+            <div class="col">{{itemPedido.produto.nome}}</div>
+            <div class="col">{{itemPedido.quantidade}}</div>
+            <div class="col fw-bold">{{itemPedido.produto.preco}}</div>
+            <div class="col fw-bold">{{itemPedido.valorTotal}}</div>
           </div>
         </div>
       </div>
