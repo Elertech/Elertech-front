@@ -100,6 +100,7 @@ export class CarrinhoComponent implements OnInit {
       this.pedido = data
       this.alerta.showAlertSuccess('Pedido finalizado com sucesso')
       this.pedido = new Pedido()
+      this.CarregarCarrinho()
     },
     (error: any) => {
       switch(error.status){
