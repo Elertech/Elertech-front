@@ -20,7 +20,7 @@ export class CadastrarProdutoComponent implements OnInit {
 
   categoria: Categoria = new Categoria()
   listaCategoria: Categoria[]
-
+  categoriaId: number
   valorFormatado: string
 
   constructor(
@@ -43,16 +43,12 @@ export class CadastrarProdutoComponent implements OnInit {
   }
 
   categoriaProduto(event: any){
-    let id = event.target.value
-    this.categoriaService.getById(id).subscribe((data: Categoria)=>{
-      this.categoria = data
-    })
+    this.categoriaId= event.target.value
   }
 
   cadastrarProduto(){
-    this.produto.categoria = this.categoria
     this.produto.foto = $('#setFoto').attr('src')
-    this.produtoService.save(this.produto).subscribe((data: Produto) => {
+    this.produtoService.save(this.produto, this.categoriaId).subscribe((data: Produto) => {
       this.produto = data
       this.alerta.showAlertSuccess(`Produto ${this.produto.nome} cadastrado com sucesso`)
       this.produto = new Produto()
@@ -79,21 +75,16 @@ export class CadastrarProdutoComponent implements OnInit {
   abrirModalEditar(produto: Produto){
     this.produto = produto
     $("#categoriaProdutoEditar option:contains("+this.produto.categoria.nomeCategoria+")").attr('selected', 'true');
-    let id = this.produto.categoria.id
-    this.categoriaService.getById(id).subscribe((data: Categoria)=>{
-      this.categoria = data
-    })
+    this.categoriaId = this.produto.categoria.id
   }
 
   atualizarProduto(){
-    this.produto.categoria = this.categoria
-    this.produto.id = $('#idEditar').val()
     this.produto.nome = $('#nomeEditar').val()
     this.produto.preco = $('#precoEditar').val()
     this.produto.estoque = $('#estoqueEditar').val()
     this.produto.descricao = $('#descricaoEditar').val()
     this.produto.foto = $('#fotoProdutoEditar').attr('src')
-    this.produtoService.update(this.produto).subscribe((data: Produto) => {
+    this.produtoService.update(this.produto, this.categoriaId).subscribe((data: Produto) => {
 
       this.produto = data
       this.alerta.showAlertSuccess('Produto atualizado com sucesso')

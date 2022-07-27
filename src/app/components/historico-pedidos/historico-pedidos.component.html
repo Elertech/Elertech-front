@@ -1,13 +1,13 @@
-<main class="pt-4" style="margin-top:55px; "  >
+<main class="pt-4" style="margin-top:55px; ">
   <div class=" container d-block row w-75 mx-auto ">
 
-    <div class="row p-3 fw-bold mx-auto rounded"  style="background: #b3e2e0">
+    <div class="row p-3 fw-bold mx-auto rounded" style="background: #b3e2e0">
       <div class="col"></div>
       <div class="col text-center">Compras:</div>
       <div class="col"></div>
     </div>
 
-    <div class=" mx-auto d-block fs-20 shadow-lg p-3 mb-5  rounded" >
+    <div class=" mx-auto d-block fs-20 shadow-lg p-3 mb-5  rounded">
 
       <div class="col-12 row-cols ">
         <div class="row col mb-3 fw-bold ">
@@ -15,10 +15,11 @@
 
         </div>
         <hr>
-        <div *ngFor="let dia of dias" class="pai filha hover-effect" data-bs-toggle="modal" data-bs-target="#abrirCarrinhoModal" (click)="setSelectedDia(dia)">
-            <div class="col fw-bold  d-flex justify-content-center align-items-center">
-              <p class="display-5">{{dia}}</p>
-            </div>
+        <div *ngFor="let item of listaPedidos" class="pai filha hover-effect" data-bs-toggle="modal"
+          data-bs-target="#abrirCarrinhoModal" (click)="abrirPedido(item)">
+          <div class="col fw-bold  d-flex justify-content-center align-items-center">
+            <p class="display-5">{{item.dataPedido}}</p>
+          </div>
           <hr>
         </div>
 
@@ -28,47 +29,39 @@
 
   </div>
 
-  <div class="modal fade" id="abrirCarrinhoModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+  <div class="modal fade" id="abrirCarrinhoModal" tabindex="-1" aria-labelledby="staticBackdropLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl" style="width: 1100px; ">
-      <div class="modal-content" >
+      <div class="modal-content">
         <div class="modal-header ">
-          <h5 class="modal-title" id="staticBackdropLabel" >Itens do pedido: </h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Itens do pedido: </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body fs-15" >
-
-
+        <div class="modal-body fs-15">
+          <div>
+            <label>Endereço de entrega: <b>{{enderecoEntregaPedido}}</b> | Forma de pagamento: <b>{{pagamentoPedido}}</b></label>
+          </div>
+          <hr>
           <div class="row col fw-bold">
-            <div class="col text-center d-flex justify-content-center align-items-center">PRODUTOS</div>
             <div class="col text-center d-flex justify-content-center align-items-center"></div>
+            <div class="col text-center d-flex justify-content-center align-items-center">PRODUTO</div>
             <div class="col text-center d-flex justify-content-center align-items-center">QUANTIDADE</div>
             <div class="col text-center d-flex justify-content-center align-items-center">VALOR UNITÁRIO</div>
             <div class="col text-center d-flex justify-content-center align-items-center">SUBTOTAL</div>
-            <div class="col text-center d-flex justify-content-center align-items-center">FORMA DE PAGAMENTO</div>
-            <div class="col text-center d-flex justify-content-center align-items-center">ENDEREÇO DE ENTREGA</div>
           </div>
           <hr>
-
-
-            <div class="row col text-center" *ngFor="let item of getPedidosByDia()">
-              <div class="col">
-                <img src="{{item.foto}}" alt="" class=""
-                  style="max-width:90%; max-height:100%; width: auto; height: auto;">
-              </div>
-              <div class="col">{{item.nomeProduto}}</div>
-              <div class="col">{{item.quantidade}}</div>
-              <div class="col fw-bold">R$ {{item.valorUnitario}}</div>
-              <div class="col fw-bold">R$ {{item.valorTotal}}</div>
-              <div class="col">{{item.formaPagamento}}</div>
-              <div class="col">{{item.enderecoEntrega}}</div>
-
+          <div class="row col text-center" *ngFor="let i of listaItenPedido">
+            <div class="col">
+              <img src="{{i.produto.foto}}" alt="" class=""
+                style="max-width:90%; max-height:100%; width: auto; height: auto;">
             </div>
-
-
-
+            <div class="col">{{i.produto.nome}}</div>
+            <div class="col">{{i.quantidade}}</div>
+            <div class="col fw-bold">R$ {{i.produto.preco}}</div>
+            <div class="col fw-bold">R$ {{i.valorTotal}}</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
 </main>

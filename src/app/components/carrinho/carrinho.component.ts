@@ -3,13 +3,14 @@ import { Router } from '@angular/router';
 import { Carrinho } from 'src/app/model/Carrinho';
 import { CartaoCredito } from 'src/app/model/CartaoCredito';
 import { Endereco } from 'src/app/model/Endereços';
-import { Produto } from 'src/app/model/Produto';
-import { Usuario } from 'src/app/model/Usuario';
+import { Item } from 'src/app/model/Item';
+import { Pedido } from 'src/app/model/Pedido';
 import { AlertaService } from 'src/app/service/alerta.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { CarrinhoService } from 'src/app/service/carrinho.service';
 import { CartaoCreditoService } from 'src/app/service/cartao-credito.service';
 import { EnderecoService } from 'src/app/service/endereco.service';
+import { PedidoService } from 'src/app/service/pedido.service';
 import { ProdutoService } from 'src/app/service/produto.service';
 import { environment } from 'src/environments/environment.prod';
 declare var $:any;
@@ -24,22 +25,13 @@ export class CarrinhoComponent implements OnInit {
   carrinho:Carrinho = new Carrinho()
   cartao: CartaoCredito = new CartaoCredito()
   endereco: Endereco = new Endereco()
-  usuario:Usuario = new Usuario()
-  produto:Produto = new Produto()
+  pedido: Pedido = new Pedido()
 
   //Listas para interagir com o html
-  listaCarrinho: Carrinho[]
+  listaItem: any = new Item()
   listaCartao:CartaoCredito[]
   listaEndereco: Endereco[]
 
-  //Lista para fazer o filtro por status
-  lista: any
-
-  //Variável para exibir a soma dos produtos no html
-  somaDosProdutos: number
-
-  //variavel para contar os itens do carrinho
-  qtdItens: number
 
   constructor(
     private router: Router,
@@ -48,7 +40,8 @@ export class CarrinhoComponent implements OnInit {
     private alerta: AlertaService,
     private produtoService: ProdutoService,
     private cartaoService: CartaoCreditoService,
-    private enderecoService: EnderecoService
+    private enderecoService: EnderecoService,
+    private pedidoService: PedidoService
   ) { }
 
   ngOnInit() {
@@ -73,71 +66,54 @@ export class CarrinhoComponent implements OnInit {
     this.cartao = new CartaoCredito()
   }
 
-  //Método para buscar o usuario pelo id, e retornar os cartoes, endereços e carrinho.
   CarregarCarrinho(){
-    this.auth.getById(environment.id).subscribe((data: Usuario)=>{
-      this.usuario = data
-      this.lista = this.usuario.carrinho //Armazena o carrinho do usuario dentro da lista para fazer o filtro
-      this.listaCartao = this.usuario.cartaoCredito //Armazena os cartões do usuario em listaCartao
-      this.listaEndereco = this.usuario.endereco //Armazena os endereços do usuario em listaEndereco
-      this.listaCarrinho = this.lista.filter(function(c: Carrinho){return c.status == 'carrinho'}) //Função para armazenar em listaCarrinho o fitro da lista por status
-      this.somaTotal()
+    this.carrinhoService.getById(environment.id).subscribe((data: Carrinho)=>{
+      this.carrinho = data
+      this.listaItem = this.carrinho.item
     })
 
+    this.enderecoService.getAll().subscribe((data: Endereco[])=>{
+      this.listaEndereco = data
+    })
+
+    this.cartaoService.getAll().subscribe((data: CartaoCredito[])=>{
+      this.listaCartao = data
+    })
   }
 
-  somaTotal(){
-    this.somaDosProdutos = 0
-    this.qtdItens = 0
-    for(let i=0; i < this.listaCarrinho.length; i++){
-      this.somaDosProdutos = this.listaCarrinho[i].valorTotal + this.somaDosProdutos
-      this.qtdItens = this.qtdItens + 1
-    }
-  }
-
-  excluirProduto(id: number, idProduto: number, quantidade: number){
-    this.carrinhoService.delete(id).subscribe(()=>{
+  excluirItem(id: number){
+    this.carrinhoService.deleteItem(id).subscribe(()=>{
       this.alerta.showAlertWarning(`Produto excluído com sucesso`)
-      this.atualizarEstoque(idProduto, quantidade)
       this.CarregarCarrinho()
-      this.ngOnInit()
     })
   }
 
-  atualizarEstoque(idProduto: number, quantidade: number){
-    // busca o produto no estoque
-    this.produtoService.getById(idProduto).subscribe((data: Produto)=>{
-      this.produto = data
-      // Atualiza o estoque disponível
-      this.produto.estoque = this.produto.estoque + quantidade
-      this.produtoService.update(this.produto).subscribe((data: Produto)=>{
-      this.produto = data
-      console.log('Estoque atualizado com sucesso')
-      this.produto = new Produto
-      })
+  limpar(id: number){
+    this.carrinhoService.deleteItem(id).subscribe(()=>{
+      this.alerta.showAlertWarning(`Produto excluído com sucesso`)
+      this.CarregarCarrinho()
     })
   }
 
-  finalizarPedido(){
-    const user = new Usuario()
-    user.id = this.usuario.id
-    if(this.cartao.nomeCartao.length > 0 && this.endereco.endereco.length > 0 && this.listaCarrinho.length > 0){
-    this.listaCarrinho.forEach((item: Carrinho) => {
-      item.usuario = user
-      item.status = 'pedido'
-      item.formaPagamento = this.cartao.apelido + ' - Final '+this.cartao.numeroCartao.slice(-4)
-      item.enderecoEntrega = this.endereco.endereco +' - '+ this.endereco.cep
+  fecharPedido(){
+    this.pedidoService.fecharPedido(this.endereco.id, this.cartao.id).subscribe((data: Pedido)=>{
+      this.pedido = data
+      this.alerta.showAlertSuccess('Pedido finalizado com sucesso')
+      this.pedido = new Pedido()
+    },
+    (error: any) => {
+      switch(error.status){
+        case 400:
+          this.alerta.showAlertDanger('Erro na requisção, erro: '+error.status)
+        break;
+        case 401:
+          this.alerta.showAlertDanger('Acesso não autorizado, erro: '+error.status)
+        break;
+        case 500:
+          this.alerta.showAlertDanger('Erro na aplicação, erro: '+error.status)
+        break;
+      }
     })
-      this.carrinhoService.fazerPedido(this.listaCarrinho).subscribe((resp: Carrinho[])=>{
-        this.CarregarCarrinho()
-        this.alerta.showAlertSuccess('Pedido finalizado com sucesso')
-      })
-    } else if(this.listaCarrinho.length < 1){
-      this.alerta.showAlertDanger('Seu carrinho está vazio!')
-    } else if(this.cartao.nomeCartao.length == 0 || this.endereco.endereco.length == 0){
-      this.alerta.showAlertDanger('É necessário selecionar uma forma e pagamento e um endereço de entrega!')
-    }
-    console.log(this.listaCarrinho)
   }
 
 }

@@ -16,31 +16,31 @@ export class ProdutoService {
   }
 
   getAll(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(environment.url+'/produto', this.token)
+    return this.http.get<Produto[]>(environment.url+`/produto`, this.token)
   }
 
   getById(id: number){
-    return this.http.get<Produto>(environment.url+'/produto/'+ id, this.token)
+    return this.http.get<Produto>(environment.url+`/produto/${id}`, this.token)
   }
 
-  getbyName(nome: string):Observable<Produto[]>{
-    return this.http.get<Produto[]>(environment.url+'/produto/pesquisar/'+ nome, this.token)
+  getByName(nome: string):Observable<Produto[]>{
+    return this.http.get<Produto[]>(environment.url+`/produto/pesquisar/${nome}`, this.token)
   }
 
-  getbyCategoria(categoria: string):Observable<Produto[]>{
-    return this.http.get<Produto[]>(environment.url+'/produto/categoria/'+ categoria, this.token)
+  getByCategoria(idCategoria: number):Observable<Produto[]>{
+    return this.http.get<Produto[]>(environment.url+`/produto/pesquisar/categoria/${idCategoria}`, this.token)
   }
 
-  save(produto: Produto):Observable<Produto>{
-    return this.http.post<Produto>(environment.url+'/produto/cadastrar', produto, this.token)
+  save(produto: Produto, idCategoria: number):Observable<Produto>{
+    return this.http.post<Produto>(environment.url+`/produto/cadastrar/categoria/${idCategoria}`, produto, this.token)
   }
 
-  update(produto:Produto):Observable<Produto>{
-    return this.http.put<Produto>(environment.url+'/produto/atualizar', produto, this.token)
+  update(produto:Produto, idCategoria: number):Observable<Produto>{
+    return this.http.put<Produto>(environment.url+`/produto/atualizar/categoria/${idCategoria}`, produto, this.token)
   }
 
   delete(id: number){
-    return this.http.delete<Produto>(environment.url+'/produto/'+ id, this.token)
+    return this.http.delete<Produto>(environment.url+`/produto/${id}`, this.token)
   }
 
 }

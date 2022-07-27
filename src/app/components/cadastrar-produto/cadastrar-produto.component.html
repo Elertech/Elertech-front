@@ -74,7 +74,7 @@
 
             <div class="col-5">
               <label class="form-label" for="nomeCadastrar">Nome do produto</label>
-              <input [(ngModel)]="produto.nome" name="nome" type="text" class="form-control" id="nomeCadastrar">
+              <input [(ngModel)]="produto.nome" name="nomeProduto" type="text" class="form-control" id="nomeCadastrar">
               <div id="nomeCadastrarHelp" class="form-text">Campo obrigatório</div>
             </div>
 
@@ -146,7 +146,7 @@
 
             <div class="col-3">
               <input name="id" type="text" id="idEditar" hidden="true" value="{{produto.id}}">
-              <label class="form-label" for="nomeEditar">Nome do produto</label>
+              <label name="nome" class="form-label" for="nomeEditar">Nome do produto</label>
               <input name="nome" type="text" class="form-control" id="nomeEditar" value="{{produto.nome}}">
               <div id="nomeEditarHelp" class="form-text">Campo obrigatorio</div>
             </div>
