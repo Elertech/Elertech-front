@@ -1,18 +1,10 @@
+import { Item } from "./Item"
 import { Usuario } from "./Usuario"
 
 export class Carrinho{
   public id: number
-  public nomeProduto: string
-  public idProduto: number
-  public foto: string
-  public descricao: string
-  public categoria: string
-  public quantidade: number
-  public valorUnitario: number
-  public valorTotal: number
-  public data: string
-  public status: string
+  public quantidadeItem: number
+  public valorTotalItem: number
   public usuario: Usuario
-	public enderecoEntrega: string
-	public formaPagamento: string
+  public item: Item
 }
