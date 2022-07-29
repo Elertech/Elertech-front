@@ -31,7 +31,7 @@ export class CategoriaService {
     return this.http.put<Categoria>(environment.url+'/categoria/atualizar', categoria, this.token)
   }
 
-  deletar(id: number){
+  delete(id: number){
     return this.http.delete<Categoria>(environment.url+'/categoria/'+id, this.token)
   }
 }

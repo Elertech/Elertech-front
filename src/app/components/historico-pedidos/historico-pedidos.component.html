@@ -1,18 +1,14 @@
-<main class="pt-4" style="margin-top:55px; ">
-  <div class=" container d-block row w-75 mx-auto ">
-
-    <div class="row p-3 fw-bold mx-auto rounded" style="background: #b3e2e0">
+<main class="container">
+  <div class="row p-4 mb-5">
+    <div class="container row p-3 fw-bold mx-auto rounded" style="background: #b3e2e0">
       <div class="col"></div>
       <div class="col text-center">Compras:</div>
       <div class="col"></div>
     </div>
-
     <div class=" mx-auto d-block fs-20 shadow-lg p-3 mb-5  rounded">
-
       <div class="col-12 row-cols ">
         <div class="row col mb-3 fw-bold ">
           <div class="col text-center d-flex justify-content-center align-items-center">Lista de pedidos</div>
-
         </div>
         <hr>
         <div *ngFor="let pedido of listaPedidos" class="pai filha hover-effect" data-bs-toggle="modal"
@@ -22,47 +18,46 @@
           </div>
           <hr>
         </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="modal fade" id="abrirCarrinhoModal" tabindex="-1" aria-labelledby="staticBackdropLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl" style="width: 1100px; ">
-      <div class="modal-content">
-        <div class="modal-header ">
-          <h5 class="modal-title" id="staticBackdropLabel">Itens do pedido: </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body fs-15">
-          <div>
-            <label>Endereço de entrega: <b>{{enderecoEntregaPedido}}</b> | Forma de pagamento:
-              <b>{{pagamentoPedido}}</b></label>
-          </div>
-          <hr>
-          <div class="row col fw-bold">
-            <div class="col text-center d-flex justify-content-center align-items-center"></div>
-            <div class="col text-center d-flex justify-content-center align-items-center">PRODUTO</div>
-            <div class="col text-center d-flex justify-content-center align-items-center">QUANTIDADE</div>
-            <div class="col text-center d-flex justify-content-center align-items-center">VALOR UNITÁRIO</div>
-            <div class="col text-center d-flex justify-content-center align-items-center">SUBTOTAL</div>
-          </div>
-          <hr>
-          <div class="row col text-center" *ngFor="let itemPedido of listaItenPedido">
-            <div class="col">
-              <img src="{{itemPedido.produto.foto}}" alt="" class=""
-                style="max-width:90%; max-height:100%; width: auto; height: auto;">
-            </div>
-            <div class="col">{{itemPedido.produto.nome}}</div>
-            <div class="col">{{itemPedido.quantidade}}</div>
-            <div class="col fw-bold">{{itemPedido.produto.preco}}</div>
-            <div class="col fw-bold">{{itemPedido.valorTotal}}</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </main>
+
+<div class="modal fade" id="abrirCarrinhoModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" style="width: 1100px; ">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title" id="staticBackdropLabel">Itens do pedido: </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body fs-15">
+        <div>
+          <label>Endereço de entrega: <b>{{enderecoEntregaPedido}}</b> | Forma de pagamento:
+            <b>{{pagamentoPedido}}</b></label>
+        </div>
+        <hr>
+        <div class="row col fw-bold">
+          <div class="col text-center d-flex justify-content-center align-items-center"></div>
+          <div class="col text-center d-flex justify-content-center align-items-center">PRODUTO</div>
+          <div class="col text-center d-flex justify-content-center align-items-center">QUANTIDADE</div>
+          <div class="col text-center d-flex justify-content-center align-items-center">VALOR UNITÁRIO</div>
+          <div class="col text-center d-flex justify-content-center align-items-center">SUBTOTAL</div>
+        </div>
+        <hr>
+        <div class="row col text-center" *ngFor="let itemPedido of listaItenPedido">
+          <div class="col align-items-center">
+            <img src="{{itemPedido.produto.foto}}" class="imgItemPedido">
+          </div>
+          <div class="col-md text-center d-flex justify-content-center align-items-center">{{itemPedido.produto.nome}}
+          </div>
+          <div class="col-md text-center d-flex justify-content-center align-items-center">{{itemPedido.quantidade}}
+          </div>
+          <div class="col-md text-center d-flex justify-content-center align-items-center fw-bold">
+            {{itemPedido.produto.preco}}</div>
+          <div class="col-md text-center d-flex justify-content-center align-items-center fw-bold">
+            {{itemPedido.valorTotal}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

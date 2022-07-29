@@ -6,9 +6,7 @@ import { Usuario } from 'src/app/model/Usuario';
 import { AlertaService } from 'src/app/service/alerta.service';
 import { AuthService } from 'src/app/service/auth.service';
 import { CartaoCreditoService } from 'src/app/service/cartao-credito.service';
-import { environment } from 'src/environments/environment.prod';
 
-import * as Inputmask from "inputmask"
 declare var $:any;
 
 
@@ -37,6 +35,7 @@ export class TabelaCartaoCreditoComponent implements OnInit {
   getAllCartaoUsuario(){
     this.cartaoService.getAll().subscribe((data: CartaoCredito[]) => {
       this.listaCartao = data
+      this.cartao = new CartaoCredito()
     })
   }
 
@@ -55,7 +54,7 @@ export class TabelaCartaoCreditoComponent implements OnInit {
       this.alerta.showAlertSuccess('Cartao cadastrado com sucesso')
       this.limparModal()
       this.getAllCartaoUsuario()
-      this.cartao = new CartaoCredito
+      this.cartao = new CartaoCredito()
 
     },
     (error: any) => {
@@ -80,7 +79,7 @@ export class TabelaCartaoCreditoComponent implements OnInit {
   excluir(){
     this.cartaoService.delete(this.cartao.id).subscribe(() => {
       this.alerta.showAlertSuccess('Cartao excluído com sucesso')
-      this.cartao = new CartaoCredito
+      this.cartao = new CartaoCredito()
       this.getAllCartaoUsuario()
       this.fecharModal()
     },(error: any) => {
