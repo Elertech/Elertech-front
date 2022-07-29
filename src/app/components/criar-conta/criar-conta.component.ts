@@ -24,8 +24,8 @@ export class CriarContaComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    window.scroll(0,0)
     this.mascara()
+    window.scroll(0,0)
   }
 
   mascara(){
