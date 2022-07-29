@@ -31,7 +31,7 @@ export class CarrinhoService {
     return this.http.delete<Carrinho>(environment.url+`/carrinho/${environment.id}/deleteitem/${id}`, this.token)
   }
 
-  limparCarrinho(id: number){
+  limparCarrinho(){
     return this.http.delete<Carrinho>(environment.url+`/carrinho/limpar/${environment.id}`, this.token)
   }
 }

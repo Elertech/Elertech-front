@@ -41,14 +41,17 @@ export class TabelaEnderecoComponent implements OnInit {
     })
   }
 
+  abrirModalCadastrar(){
+    this.endereco = new Endereco()
+    this.limparModal()
+  }
+
   cadastrar(){
     this.endereco.cep = $('#cepCadastrar').val()
     this.enderecoService.save(this.endereco).subscribe((data: Endereco) => {
       this.endereco = data
-      console.log(this.endereco)
-      this.getAllEnderecoUsuario()
       this.alerta.showAlertSuccess('Endereco cadastrado com sucesso')
-      this.limparModal
+      this.getAllEnderecoUsuario()
       this.endereco = new Endereco()
     },
     (error: any) => {
@@ -75,10 +78,9 @@ export class TabelaEnderecoComponent implements OnInit {
     this.endereco.cep = $('#cepEditar').val()
     this.enderecoService.update(this.endereco).subscribe((data: Endereco)=>{
       this.endereco = data
-      this.endereco = new Endereco()
       this.alerta.showAlertSuccess('Endereco atualizado com sucesso')
       this.getAllEnderecoUsuario()
-      this.fecharModal()
+      this.endereco = new Endereco()
     })
   }
 
@@ -91,8 +93,7 @@ excluir(){
       this.endereco = data
       this.getAllEnderecoUsuario()
       this.alerta.showAlertSuccess('Endereco excluído com sucesso')
-      this.endereco = new Endereco
-      this.fecharModal()
+      this.endereco = new Endereco()
     },
     (error: any) => {
       switch(error.status){

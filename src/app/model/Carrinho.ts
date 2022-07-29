@@ -6,5 +6,5 @@ export class Carrinho{
   public quantidadeItem: number
   public valorTotalItem: number
   public usuario: Usuario
-  public item: Item
+  public item: Item[]
 }

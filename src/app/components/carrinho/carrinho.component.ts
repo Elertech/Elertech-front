@@ -13,7 +13,7 @@ import { EnderecoService } from 'src/app/service/endereco.service';
 import { PedidoService } from 'src/app/service/pedido.service';
 import { ProdutoService } from 'src/app/service/produto.service';
 import { environment } from 'src/environments/environment.prod';
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-carrinho',
@@ -22,14 +22,16 @@ declare var $:any;
 })
 export class CarrinhoComponent implements OnInit {
   //Instanciando as classes
-  carrinho:Carrinho = new Carrinho()
+  carrinho: Carrinho = new Carrinho()
   cartao: CartaoCredito = new CartaoCredito()
   endereco: Endereco = new Endereco()
   pedido: Pedido = new Pedido()
+  valorTotalCarrinho: string
 
   //Listas para interagir com o html
-  listaItem: any = new Item()
-  listaCartao:CartaoCredito[]
+  // listaItem: any = new Array()
+  listaItem = new Array()
+  listaCartao: CartaoCredito[]
   listaEndereco: Endereco[]
 
 
@@ -48,73 +50,80 @@ export class CarrinhoComponent implements OnInit {
     this.CarregarCarrinho()
   }
 
-  pegarSelectEndereco(event: any){
+  pegarSelectEndereco(event: any) {
     const id = event.target.value
-    this.enderecoService.getById(id).subscribe((data: Endereco)=>{
+    this.enderecoService.getById(id).subscribe((data: Endereco) => {
       this.endereco = data
       console.log(this.endereco)
     })
     this.endereco = new Endereco()
   }
 
-  pegarSelectCartao(event: any){
+  pegarSelectCartao(event: any) {
     const id = event.target.value
-    this.cartaoService.getById(id).subscribe((data: CartaoCredito)=>{
+    this.cartaoService.getById(id).subscribe((data: CartaoCredito) => {
       this.cartao = data
       console.log(this.cartao)
     })
     this.cartao = new CartaoCredito()
   }
 
-  CarregarCarrinho(){
-    this.carrinhoService.getById(environment.id).subscribe((data: Carrinho)=>{
+  CarregarCarrinho() {
+    this.carrinhoService.getById(environment.id).subscribe((data: Carrinho) => {
       this.carrinho = data
       this.listaItem = this.carrinho.item
+
+      this.listaItem.forEach(i => {
+        i.produto.preco = i.produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        i.valorTotal = i.valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+      })
+
+      this.valorTotalCarrinho = this.carrinho.valorTotalItem.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
     })
 
-    this.enderecoService.getAll().subscribe((data: Endereco[])=>{
+    this.enderecoService.getAll().subscribe((data: Endereco[]) => {
       this.listaEndereco = data
     })
 
-    this.cartaoService.getAll().subscribe((data: CartaoCredito[])=>{
+    this.cartaoService.getAll().subscribe((data: CartaoCredito[]) => {
       this.listaCartao = data
     })
   }
 
-  excluirItem(id: number){
-    this.carrinhoService.deleteItem(id).subscribe(()=>{
+  excluirItem(id: number) {
+    this.carrinhoService.deleteItem(id).subscribe(() => {
       this.alerta.showAlertWarning(`Produto excluído com sucesso`)
       this.CarregarCarrinho()
     })
   }
 
-  limpar(id: number){
-    this.carrinhoService.deleteItem(id).subscribe(()=>{
-      this.alerta.showAlertWarning(`Produto excluído com sucesso`)
+  limpar() {
+    this.carrinhoService.limparCarrinho().subscribe(() => {
+      this.alerta.showAlertWarning(`Carrinho limpo com sucesso`)
       this.CarregarCarrinho()
     })
   }
 
-  fecharPedido(){
-    this.pedidoService.fecharPedido(this.endereco.id, this.cartao.id).subscribe((data: Pedido)=>{
+  fecharPedido() {
+    this.pedidoService.fecharPedido(this.endereco.id, this.cartao.id).subscribe((data: Pedido) => {
       this.pedido = data
       this.alerta.showAlertSuccess('Pedido finalizado com sucesso')
       this.pedido = new Pedido()
       this.CarregarCarrinho()
     },
-    (error: any) => {
-      switch(error.status){
-        case 400:
-          this.alerta.showAlertDanger('Erro na requisção, erro: '+error.status)
-        break;
-        case 401:
-          this.alerta.showAlertDanger('Acesso não autorizado, erro: '+error.status)
-        break;
-        case 500:
-          this.alerta.showAlertDanger('Erro na aplicação, erro: '+error.status)
-        break;
-      }
-    })
+      (error: any) => {
+        switch (error.status) {
+          case 400:
+            this.alerta.showAlertDanger('Erro na requisção, erro: ' + error.status)
+            break;
+          case 401:
+            this.alerta.showAlertDanger('Acesso não autorizado, erro: ' + error.status)
+            break;
+          case 500:
+            this.alerta.showAlertDanger('Erro na aplicação, erro: ' + error.status)
+            break;
+        }
+      })
   }
 
 }

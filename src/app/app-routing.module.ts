@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'pesquisar', component: CardPesquisaProdutoComponent},
   {path: 'historicopedidos', component: HistoricoPedidosComponent},
   {path: 'pesquisarcategoria', component: CardPesquisaCategoriaComponent},
-  {path: 'sobre', component: SobreComponent}
+  {path: 'sobre', component: SobreComponent},
 ];
 
 @NgModule({

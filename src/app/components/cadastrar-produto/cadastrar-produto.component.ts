@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlertaService } from 'src/app/service/alerta.service';
 import { CategoriaService } from 'src/app/service/categoria.service';
 import { Categoria } from 'src/app/model/Categoria';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 declare var $:any;
 
 @Component({
@@ -24,6 +25,7 @@ export class CadastrarProdutoComponent implements OnInit {
   valorFormatado: string
 
   constructor(
+    public modal: BsModalRef,
     private router: Router,
     private produtoService: ProdutoService,
     private categoriaService: CategoriaService,
@@ -54,7 +56,6 @@ export class CadastrarProdutoComponent implements OnInit {
       this.produto = new Produto()
       this.limparModal()
       this.getAllProduto()
-
       this.getAllCategoria()
     },
     (error: any) => {
@@ -162,6 +163,7 @@ export class CadastrarProdutoComponent implements OnInit {
 
   limparModal(){
     $('.modal').find('input:text').val('')
+    $('.modal').find('textarea').val('')
     $('#setFoto').attr('src', '')
     $("#categoriaEditar option:contains(Selecione uma categoria...)").attr('selected', 'true')
     $('input[type="file"]').val('')
@@ -208,14 +210,15 @@ export class CadastrarProdutoComponent implements OnInit {
 
   abrirModalAtualizarCategoria(categoria: Categoria){
     this.categoria = categoria
+    $(".modal-backdrop.fade").hide()
   }
 
   atualizarCategoria(){
     this.categoriaService.update(this.categoria).subscribe((data: Categoria)=>{
       this.categoria = data
-      this.categoria = new Categoria()
       this.alerta.showAlertSuccess(`Categoria atualizada com sucesso`)
       this.getAllCategoria()
+      this.categoria = new Categoria()
 
     },(error: any) => {
       switch(error.status){
@@ -231,6 +234,23 @@ export class CadastrarProdutoComponent implements OnInit {
       }
     })
 
+  }
+
+  deleteCategoria(id: number){
+    this.categoriaService.delete(id).subscribe(()=>{
+      this.categoria = new Categoria()
+      this.alerta.showAlertSuccess(`Categoria excluída com sucesso`)
+      this.getAllCategoria()
+    },(error: any) => {
+      switch(error.status){
+        case 500:
+          this.alerta.showAlertDanger('Erro na requisção, erro: '+error.status)
+        break;
+        case 409:
+          this.alerta.showAlertDanger('Esta categoria está associada a um ou mais produtos, não é possivel excluir: erro '+error.status)
+        break;
+      }
+    })
   }
 
 }

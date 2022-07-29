@@ -6,11 +6,11 @@
       <div class="row col-lg-12 p-3 fw-bold mx-auto rounded" style="background: rgb(237, 237, 237);">
         <div class="col"><u><a class="text-muted" routerLink="/inicio">CONTINUAR COMPRANDO</a></u></div>
         <div class="col text-center">MEU CARRINHO({{carrinho.quantidadeItem}})</div>
-        <div class="col"></div>
+        <div class="col"><u><a class="text-muted" style="cursor: pointer;" (click)="limpar()">LIMPAR CARRINHO</a></u></div>
       </div>
       <div class="mx-auto d-block  font fs-17 shadow-lg p-3 mb-5 bg-body rounded"
         style="background: rgb(255, 255, 255)">
-        <div class="col-12 row-cols text-center alinhar">
+        <div class="col-md-12 row-cols text-center alinhar">
           <div class="row col mt-5 fw-bold">
             <div class="col">PRODUTOS</div>
             <div class="col"></div>
@@ -21,14 +21,14 @@
           </div>
           <hr>
           <div class="row col mt-5 alinhar" *ngFor="let item of listaItem">
-            <div class="col">
+            <div class="col-md">
               <img src="{{item.produto.foto}}" style="max-width:90%; max-height:100%; width: auto; height: auto;">
             </div>
-            <div class="col-sm ">{{item.produto.nomeProduto}}</div>
-            <div class="col">{{item.quantidade}}</div>
-            <div class="col fw-bold">R$ {{item.produto.valorUnitario}}</div>
-            <div class="col fw-bold">R$ {{item.valorTotal}}</div>
-            <div class="col">
+            <div class="col-md">{{item.produto.nome}}</div>
+            <div class="col-md">{{item.quantidade}}</div>
+            <div class="col-md fw-bold">{{item.produto.preco}}</div>
+            <div class="col-md fw-bold">{{item.valorTotal}}</div>
+            <div class="col-md">
               <button (click)="excluirItem(item.id)" type="button"
                 class="fw-bold border border-white " style="width: 80%; height: 80%; background: white;">
                 <h4>&times;</h4>
@@ -37,13 +37,13 @@
           </div>
           <hr>
           <div class="col-12 row fs-17 alinhar">
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col"></div>
-            <div class="col fw-bold ">Total:</div>
-            <div class="col">R$ {{carrinho.valorTotalItem}}</div>
+            <div class="col-md"></div>
+            <div class="col-md"></div>
+            <div class="col-md"></div>
+            <div class="col-md"></div>
+            <div class="col-md"></div>
+            <div class="col-md fw-bold ">Total:</div>
+            <div class="col-md">R$ {{valorTotalCarrinho}}</div>
           </div>
         </div>
       </div>
