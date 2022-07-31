@@ -1,5 +1,5 @@
 <main>
-  <div class="container-fluid w-75 p-3">
+  <div class="container w-75">
     <div class="row">
       <div class="col-md">
         <h1 style="text-align: center">SOBRE A ELERTECH</h1>
@@ -9,16 +9,11 @@
     <br>
     <div class="d-flex align-items-center">
       <div class="flex-shrink-0 order-1">
-
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/5J6nloaTs8A?controls=0"
+        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/l7LF9RMx4WI?controls=0"
           title="YouTube video player" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen></iframe>
-
       </div>
-      <!-- <div class="col-md-2 ">
-        <img src="assets/icon/icon_missao.png" alt="">
-      </div> -->
       <div class="flex-grow-1 ms-3 order-2">
         <h1>Missão</h1>
         <p style="font-size: 20px">A missão da ELERTECH não é apenas vender ou alugar
@@ -52,5 +47,66 @@
           e acessibilidade, a partir da mobilidade urbana sem barreiras.</p>
       </div>
     </div>
+    <hr>
   </div>
+
+  <div class="col-md">
+    <h1 style="text-align: center">Conheça o time de desenvolvimento</h1>
+  </div>
+
+  <div class="p-1 mr-5">
+    <div class="d-flex flex-wrap justify-content-center">
+      <div *ngFor="let dev of listaDev">
+
+        <div class="card m-4" id="cardDesenvolvedor" style="max-width: 540px;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{dev.foto}}" class="img-fluid rounded-start">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">{{dev.nome}}
+                  <a class="card-link text-dark" href="{{dev.linkedin}}" target="_blank">
+                    <img class="socialIcon" src="assets/icon/linkedin_icon.png">
+                  </a>
+                  <a class="card-link text-dark" href="{{dev.github}}" target="_blank">
+                    <img class="socialIcon" src="assets/icon/github_icon.png">
+                  </a>
+                </h5>
+
+                <p class="card-text">{{dev.titulo}}</p>
+                <p class="card-text">{{dev.descricao}}</p>
+
+                <!-- <a class="card-link text-dark" href="{{dev.linkedin}}" target="_blank">
+                  <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
+                </a>
+                <a class="card-link text-dark" href="{{dev.github}}" target="_blank">
+                  <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
+                </a> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+        <!-- <div class="card m-4" id="cardDesenvolvedor" style="width: 18rem;">
+          <img src="{{dev.foto}}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{dev.nome}}</h5>
+            <p class="card-text">{{dev.descricao}}</p>
+            <p class="card-text">{{dev.formacao}}</p>
+            <div class="card-body">
+              <a class="card-link text-dark" href="{{dev.linkedin}}" target="_blank">
+                <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
+              </a>
+              <a class="card-link text-dark" href="{{dev.github}}" target="_blank">
+                <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
+              </a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+
 </main>
