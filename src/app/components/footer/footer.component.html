@@ -5,88 +5,20 @@
         <p class="h4 text-dark mb-3 pt-4">Conheça o time de desenvolvimento</p>
       </div>
     </div>
-    <div class="row text-center justify-content-center df-flex">
+    <div class="row text-center justify-content-center df-flex" >
 
-      <div class="col-md pb-3">
+      <div class="col-md pb-3" *ngFor="let dev of listaDev">
+        <!-- <div>
+          <img id="fotoDesenvolvedor" src="{{dev.foto}}">
+        </div> -->
         <div>
-          <img id="fotoDesenvolvedor" src="assets/img/Fotos desenvolvedores/guilherme_arizza.jpg">
+          <label class="h5">{{dev.nome}}</label>
         </div>
         <div>
-          <label class="h5">Guilherme Ariza</label>
-        </div>
-        <div>
-          <a class="text-dark" href="https://github.com/guilhermeariza" target="_blank">
+          <a class="text-dark" href="{{dev.github}}" target="_blank">
             <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
           </a>
-          <a class="text-dark" href="https://www.linkedin.com/in/guilherme-ariza" target="_blank">
-            <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md">
-        <div>
-          <img id="fotoDesenvolvedor" src="assets/img/Fotos desenvolvedores/lucas_theberge.jpg">
-        </div>
-        <div class="row">
-          <label class="h5">Lucas Theberge</label>
-        </div>
-        <div>
-          <a class="text-dark" href="https://github.com/lucastheberge" target="_blank">
-            <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
-          </a>
-          <a class="text-dark" href="https://www.linkedin.com/in/lucas-theberge" target="_blank">
-            <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md">
-        <div>
-          <img id="fotoDesenvolvedor" src="assets/img/Fotos desenvolvedores/pamela_azevedo.jpg">
-        </div>
-        <div class="row">
-          <label class="h5">Pamela Azevedo</label>
-        </div>
-        <div>
-          <a class="text-dark" href="https://github.com/Pamelaazeved0" target="_blank">
-            <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
-          </a>
-          <a class="text-dark" href="https://www.linkedin.com/in/pamela-azevedo-129768220" target="_blank">
-            <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md">
-        <div>
-          <img id="fotoDesenvolvedor" src="assets/img/Fotos desenvolvedores/vanessa_jesus.jpeg">
-        </div>
-        <div class="row">
-          <label class="h5">Vanessa de jesus</label>
-        </div>
-        <div>
-          <a class="text-dark" href="https://github.com/VanessaAntonio0102" target="_blank">
-            <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
-          </a>
-          <a class="text-dark" href="https://www.linkedin.com/in/vanessadaporto" target="_blank">
-            <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
-          </a>
-        </div>
-      </div>
-
-      <div class="col-md">
-        <div>
-          <img id="fotoDesenvolvedor" src="assets/img/Fotos desenvolvedores/vinicius_campanholi.jpg">
-        </div>
-        <div class="row">
-          <label class="h5">Vinicius Campanholi</label>
-        </div>
-        <div>
-          <a class="text-dark" href="https://github.com/ViniciusCampanholi" target="_blank">
-            <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
-          </a>
-          <a class="text-dark" href="https://www.linkedin.com/in/viniciuscampanholi" target="_blank">
+          <a class="text-dark" href="{{dev.linkedin}}" target="_blank">
             <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
           </a>
         </div>

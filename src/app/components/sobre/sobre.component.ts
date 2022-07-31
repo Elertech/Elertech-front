@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Desenvolvedores } from 'src/app/model/desenvolvedores';
+import { DesenvolvedoresService } from 'src/app/service/desenvolvedores.service';
 
 @Component({
   selector: 'app-sobre',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SobreComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private devService: DesenvolvedoresService) { }
+  listaDev: Desenvolvedores[]
   ngOnInit(){
+    this.listaDev = this.devService.getAll()
   }
 
 }

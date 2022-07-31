@@ -11,7 +11,7 @@ html{
   min-height: 100%;
 }
 
-.cont{
+.cont{ 
   height: 100%;
   display: flex;
   flex-direction: column;
