@@ -50,17 +50,6 @@ export class CarrinhoComponent implements OnInit {
     this.CarregarCarrinho()
   }
 
-  verificaCarrinhoVazio(){
-      this.carrinhoService.getById(environment.id).subscribe((data: Carrinho) => {
-        this.carrinho = data
-        this.listaItem = this.carrinho.item
-
-        if(this.listaItem.length == 0){
-          
-        }
-    })
-  }
-
   pegarSelectEndereco(event: any) {
     const id = event.target.value
     this.enderecoService.getById(id).subscribe((data: Endereco) => {
