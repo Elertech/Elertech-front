@@ -122,6 +122,9 @@ export class CarrinhoComponent implements OnInit {
           case 500:
             this.alerta.showAlertDanger('Erro na aplicação, erro: ' + error.status)
             break;
+          case 409:
+            this.alerta.showAlertDanger('Não é possível finalizar um carrinho vazio')
+            break;
         }
       })
   }

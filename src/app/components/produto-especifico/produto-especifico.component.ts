@@ -23,7 +23,6 @@ export class ProdutoEspecificoComponent implements OnInit {
   usuario: Usuario = new Usuario()
   valorFormatado: string
 
-
   constructor(private route: ActivatedRoute,
      private produtoService: ProdutoService,
      private auth: AuthService,
@@ -108,6 +107,5 @@ export class ProdutoEspecificoComponent implements OnInit {
         this.alerta.showAlertDanger('É necessário estar logado para fazer uma assinatura')
       }
     }
-
   //fim
 }
