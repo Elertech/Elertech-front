@@ -20,8 +20,8 @@
             <div class="col"></div>
           </div>
           <hr>
-          <div *ngIf="this.listaItem.length > 0">
-            <div class="row col mt-5 alinhar" *ngFor="let item of listaItem" >
+          <div *ngFor="let item of listaItem" >
+            <div class="row col mt-5 alinhar" *ngIf="this.listaItem.length > 0">
               <div class="col-md">
                 <img src="{{item.produto.foto}}" style="max-width:90%; max-height:100%; width: auto; height: auto;">
               </div>
