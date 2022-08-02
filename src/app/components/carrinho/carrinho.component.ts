@@ -105,6 +105,8 @@ export class CarrinhoComponent implements OnInit {
   }
 
   fecharPedido() {
+
+
     this.pedidoService.fecharPedido(this.endereco.id, this.cartao.id).subscribe((data: Pedido) => {
       this.pedido = data
       this.alerta.showAlertSuccess('Pedido finalizado com sucesso')
@@ -121,6 +123,9 @@ export class CarrinhoComponent implements OnInit {
             break;
           case 500:
             this.alerta.showAlertDanger('Erro na aplicação, erro: ' + error.status)
+            break;
+          case 409:
+            this.alerta.showAlertDanger('Não é possível finalizar um carrinho vazio')
             break;
         }
       })
