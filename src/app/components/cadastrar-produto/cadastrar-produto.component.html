@@ -5,7 +5,8 @@
 <main class="container pt-4" style="margin-top: 55px;">
   <div class="row">
     <div class="col-3">
-      <button (click)="limparModal()" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cadastrarProdutoModal">
+      <button (click)="limparModal()" class="btn btn-success" data-bs-toggle="modal"
+        data-bs-target="#cadastrarProdutoModal">
         <i class="bi bi-plus-square-fill"></i>
         Adicionar produto
       </button>
@@ -23,30 +24,22 @@
     <table class="table table-sm">
       <thead>
         <tr>
-          <th scope="col" hidden="true">ID</th>
           <th scope="col">Foto</th>
           <th scope="col">Nome</th>
           <th scope="col">Categoria</th>
           <th scope="col">Preço</th>
           <th scope="col">Estoque</th>
           <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr class="align-middle" *ngFor="let produto of listaProdutos" id="tabela">
-          <td id="idProduto" hidden="true">{{produto.id}}</td>
           <td id="fotoProduto" class="text-center"><img src="{{produto.foto}}" class="img-tabela"></td>
           <td id="nomeProduto" class="text-center">{{produto.nome}}</td>
           <td id="categoriaProduto" class="text-center">{{produto.categoria.nomeCategoria}}</td>
           <td id="precoProduto" class="text-center">R$ {{produto.preco}}</td>
           <td id="qtdProduto" class="text-center">{{produto.estoque}}</td>
-          <td class="text-center">
-            <button id="btnExcluir" (focus)="abrirModalExcluir(produto)" class="btn btn-outline-danger"
-              data-bs-toggle="modal" data-bs-target="#excluirProdutoModal">
-              <i class="bi bi-trash"></i>
-              Excluir
-            </button>
-          </td>
           <td class="text-center">
             <button id="btnEditar" (focus)="abrirModalEditar(produto)" class="btn btn-outline-primary"
               data-bs-toggle="modal" data-bs-target="#editarProdutoModal">
@@ -54,15 +47,22 @@
               Editar
             </button>
           </td>
-          </tr>
+          <td class="text-center">
+            <button id="btnExcluir" (focus)="abrirModalExcluir(produto)" class="btn btn-outline-danger"
+              data-bs-toggle="modal" data-bs-target="#excluirProdutoModal">
+              <i class="bi bi-trash"></i>
+              Excluir
+            </button>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
   <!-- tabela -->
 
   <!-- Modal cadastrar -->
-  <div class="modal fade" id="cadastrarProdutoModal" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="cadastrarProdutoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" style="max-width:1000px;">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #64AEAA; color:white; ">
@@ -227,7 +227,8 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-8">
-            <input [(ngModel)]="categoria.nomeCategoria" id="categoriaCadastrar" type="text" name="nome" class="form-control">
+            <input [(ngModel)]="categoria.nomeCategoria" id="categoriaCadastrar" type="text" name="nome"
+              class="form-control">
           </div>
           <div class="col-md-4">
             <button (click)="cadastrarCategoria()" class="btn btn-success">
@@ -258,8 +259,7 @@
                   </button>
                 </td>
                 <td class="text-center">
-                  <button id="btnExcluir" (click)="deleteCategoria(categoria.id)"
-                    class="btn btn-outline-danger">
+                  <button id="btnExcluir" (click)="deleteCategoria(categoria.id)" class="btn btn-outline-danger">
                     <i class="bi bi-trash"></i>
                     Exluir
                   </button>
@@ -282,7 +282,8 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-8">
-            <input [(ngModel)]="categoria.nomeCategoria" id="categoriaEditar" type="text" name="nome" class="form-control" value="{{categoria.nomeCategoria}}">
+            <input [(ngModel)]="categoria.nomeCategoria" id="categoriaEditar" type="text" name="nome"
+              class="form-control" value="{{categoria.nomeCategoria}}">
           </div>
           <div class="col-md-4">
             <button (click)="atualizarCategoria()" data-bs-dismiss="modal" class="btn btn-outline-primary">

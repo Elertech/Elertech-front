@@ -57,7 +57,6 @@
   <div class="p-1 mr-5">
     <div class="d-flex flex-wrap justify-content-center">
       <div *ngFor="let dev of listaDev">
-
         <div class="card m-4" id="cardDesenvolvedor" style="max-width: 540px;">
           <div class="row g-0">
             <div class="col-md-4">
@@ -73,40 +72,13 @@
                     <img class="socialIcon" src="assets/icon/github_icon.png">
                   </a>
                 </h5>
-
                 <p class="card-text">{{dev.titulo}}</p>
                 <p class="card-text">{{dev.descricao}}</p>
-
-                <!-- <a class="card-link text-dark" href="{{dev.linkedin}}" target="_blank">
-                  <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
-                </a>
-                <a class="card-link text-dark" href="{{dev.github}}" target="_blank">
-                  <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
-                </a> -->
-
               </div>
             </div>
           </div>
         </div>
-        <!--  -->
-        <!-- <div class="card m-4" id="cardDesenvolvedor" style="width: 18rem;">
-          <img src="{{dev.foto}}" class="card-img-top">
-          <div class="card-body">
-            <h5 class="card-title">{{dev.nome}}</h5>
-            <p class="card-text">{{dev.descricao}}</p>
-            <p class="card-text">{{dev.formacao}}</p>
-            <div class="card-body">
-              <a class="card-link text-dark" href="{{dev.linkedin}}" target="_blank">
-                <img class="socialIcon" src="assets/icon/linkedin_icon.png"> LinkedIn
-              </a>
-              <a class="card-link text-dark" href="{{dev.github}}" target="_blank">
-                <img class="socialIcon" src="assets/icon/github_icon.png"> GitHub
-              </a>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
-
 </main>
